@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            background: rgb(15, 95, 161);
+            transition: background 1.2s ease;
+            position: relative;
+            font-family: 'Raleway', sans-serif;
+        }
+        input {
+            font-size: 1.3em;
+        }
+        h3 {
+            color: white;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4em;
+        }
+        h5 {
+            font-weight: 300;
+            color: white;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1em;
+        }
+        .fa-check-circle {
+            color: rgb(53, 170, 112)!important;
+        }
+        .name-field,
+        .email-field,
+        .password-field,
+        .finish-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            height: 50px;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            transition: all .5s ease;
+            padding: 10px;
+        }
+        .name-field i,
+        .email-field i,
+        .password-field i,
+        .finish-field i {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.3em;
+            color: rgb(126, 126, 131);
+        }
+
+        .name-field input,
+        .email-field input,
+        .password-field input {
+            color: rgb(126, 126, 131);
+            background: none;
+            border: none;
+            outline: none;
+            flex: 1;
+            height: 100%;
+        }
+
+        div.inactive {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 50%);
+        }
+
+        div.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes shakeMe {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h3>Sign up for a free account!</h3>
+<h5>Please enter a username</h5>
+
+<form>
+    <div class="name-field active">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Username" required>
+        <i class="fas fa-arrow-down"></i>
+    </div>
+    <div class="email-field inactive">
+        <i class="fas fa-at"></i>
+        <input type="email" placeholder="Email" required>
+        <i class="fas fa-arrow-down"></i>
+    </div>
+    <div class="password-field inactive">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+        <i class="fas fa-arrow-down"></i>
+    </div>
+    <div class="finish-field inactive">
+        <p>Thank you</p>
+        <i class="fas fa-check-circle"></i>
+    </div>
+</form>
+
+<script src="https://kit.fontawesome.com/6e358658ed.js" crossorigin="anonymous"></script>
+<script>
+    const infoText = document.querySelector('h5');
+
+    function formAnimate() {
+        const arrows = document.querySelectorAll('.fa-arrow-down');
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const input = arrow.previousElementSibling;
+                const parent = arrow.parentElement;
+                const nextForm = parent.nextElementSibling;
+
+                if (input.type === 'text' && validateUser(input)) {
+                    console.log('Success')
+                    nextSlide(parent, nextForm);
+                } else if (input.type === 'email' && validateEmail(input)) {
+                    nextSlide(parent, nextForm);
+                } else if (input.type === 'password' && validatePass(input)) {
+                    nextSlide(parent, nextForm);
+                } else {
+                    parent.style.animation = 'shakeMe 0.5s ease';
+                }
+
+                parent.addEventListener('animationend', () => {
+                    parent.style.animation = '';
+                })
+            });
+        });
+    }
+
+    function validateUser(user) {
+        if (user.value.length < 6) {
+            infoText.innerText = 'Make sure your username has at least 6 characters.';
+            statusColor('rgb(189,87,87)');
+        } else {
+            infoText.innerText = 'Please enter your email address';
+            return true;
+        }
+    }
+
+    function validateEmail(email) {
+        const validation = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (validation.test(email.value)) {
+            infoText.innerText = 'Create a password';
+            return true;
+        } else {
+            infoText.innerText = 'Please enter a valid email address.';
+            statusColor('rgb(189,87,87)');
+        }
+    }
+
+    function validatePass(password) {
+        if (password.value.length < 6) {
+            infoText.innerText = 'Make sure your password has at least 6 characters.';
+            statusColor('rgb(189,87,87)');
+        } else {
+            document.body.style.backgroundColor = 'rgb(53, 170, 112)';
+            infoText.innerText = 'Your account has been created!';
+            return true;
+        }
+    }
+
+    function nextSlide(parent, nextForm) {
+        parent.classList.add('inactive');
+        parent.classList.remove('active');
+        nextForm.classList.add('active');
+    }
+
+    function statusColor(color) {
+        document.body.style.backgroundColor = color;
+        setTimeout(function() {
+            document.body.style.backgroundColor = 'rgb(15, 95, 161)';
+        }, 1200);
+    }
+
+    formAnimate();
+</script>
+
+</body>
+</html>

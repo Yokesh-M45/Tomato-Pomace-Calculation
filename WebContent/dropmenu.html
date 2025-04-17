@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery SelectBox plugin</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<link href="drop/css/jquery.selectbox.css" type="text/css" rel="stylesheet" />
+		<style>
+		body {
+    background: url("images/back.jpg");
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+    /* Optional: Fallback background color */
+    background-color: #105469;
+}
+		</style>
+	</head>
+	<body>
+		<select name="country_id" id="country_id" tabindex="1">
+				<option value="none" selected="" disabled="">SELECT</a></option>
+				<option value="waste">WASTE PROCESS</option>
+				<option value="lipid">LIPID EXTRACTION</option>
+				<option value="lacqure">LACQUER FORMATION</option>
+				<option value="testing">TESTING</option>
+		</select>
+				 <!-----start-copyright---->
+				<div class="copy-right">
+					<p>Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a> </p>
+				</div>
+				<!-----end-copyright---->
+				<script type="text/javascript" src="drop/js/jquery-1.7.2.min.js"> </script>
+				<script type="text/javascript" src="drop/js/jquery.selectbox-0.2.js"></script>
+			<script type="text/javascript">
+				$(function () {
+				$("#country_id").selectbox();
+				});
+			</script> 
+		     
+	</body>
+</html>

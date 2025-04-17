@@ -1,0 +1,11 @@
+client_id,Tomato Type,Heating Temperature (°C),Time to Heat (hours),        Sodium Hydroxide (kg)
+CLI_5863,Cherry Tomatoes,80,4,10
+CLI_5863,Plum Tomatoes,85,4,12
+CLI_5863,Beefsteak Tomatoes,75,4,8
+CLI_5863,Roma Tomatoes,70,4,7
+CLI_5863,Grape Tomatoes,78,4,9
+CLI_5863,Heirloom Tomatoes,82,4,11
+CLI_5863,Campari Tomatoes,77,4,8
+CLI_5863,Beefmaster Tomatoes,79,4,10
+CLI_5863,Cherry Plum Tomatoes,80,4,10
+CLI_5863,Cocktail Tomatoes,75,4,9
